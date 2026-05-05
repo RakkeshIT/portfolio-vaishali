@@ -29,7 +29,7 @@ const ACHIEVEMENTS = [
         org: "Data Patterns & Netaxis IT",
         desc: "Applied analytical thinking to real-world HR operations across 2 internships",
         color: "#10b981",
-        year: "2024",
+        year: "2025 - 2026",
     },
     {
         icon: "💡",
@@ -37,7 +37,7 @@ const ACHIEVEMENTS = [
         org: "Human Resource Management",
         desc: "Dual specialization in HR and Business Analytics with distinction-level performance",
         color: "#ec4899",
-        year: "2023–2024",
+        year: "2024–2026",
     },
 
 ];
@@ -68,7 +68,7 @@ const SKILLS = [
     { name: "Python", icon: <Brain size={22} />, level: 78, color: "#6366f1" },
     { name: "Looker Studio", icon: <TrendingUp size={22} />, level: 80, color: "#06b6d4" },
     { name: "HR Analytics", icon: <Users size={22} />, level: 88, color: "#ec4899" },
-    { name: "SQL", icon: <Database size={22} />, level: 72, color: "#f97316" },
+    // { name: "SQL", icon: <Database size={22} />, level: 72, color: "#f97316" },
     { name: "Communication", icon: <MessageSquare size={22} />, level: 92, color: "#8b5cf6" },
     { name: "Talent Management", icon: <Star size={22} />, level: 85, color: "#14b8a6" },
 ];
@@ -134,7 +134,7 @@ const CERTIFICATIONS = [
 const EDUCATION = [
     {
         degree: "MBA - HR & Business Analytics",
-        college: "Bharathidasan University",
+        college: "PMIST University",
         year: "Aug 2024 – July 2026",
         score: "CGPA: 9.6",
         color: "#6366f1",
@@ -401,7 +401,7 @@ export default function Hero() {
                         <div className="grid lg:grid-cols-2 gap-12 items-center">
                             <div className="space-y-6">
                                 <p className="text-slate-300 text-lg leading-relaxed">
-                                    I'm an <span className="text-indigo-300 font-semibold">MBA graduate</span> specializing in <span className="text-indigo-300 font-semibold">Human Resource Management</span> and <span className="text-indigo-300 font-semibold">Business Analytics</span>, driven by a passion for leveraging data to enhance employee experiences and organizational effectiveness.
+                                    I'm an <span className="text-indigo-300 font-semibold">MBA graduate</span> specializing in <span className="text-indigo-300 font-semibold">Human Resource </span> and <span className="text-indigo-300 font-semibold">Business Analytics</span>, driven by a passion for leveraging data to enhance employee experiences and organizational effectiveness.
                                 </p>
                                 <p className="text-slate-400 leading-relaxed">
                                     My academic journey at Bharathidasan University crowned me a <strong className="text-yellow-400">Gold Medalist and University Rank Holder</strong>, reflecting my dedication to continuous excellence. I combine strong HR fundamentals with modern analytical tools to deliver meaningful people insights.
@@ -427,8 +427,8 @@ export default function Hero() {
                                 </h3>
                                 {[
                                     { label: "Degree", value: "MBA – HR & Business Analytics" },
-                                    { label: "University", value: "Bharathidasan University" },
-                                    { label: "Achievement", value: "Gold Medalist · University Rank Holder" },
+                                    { label: "University", value: "PMIST University [Deemed University] - MBA" },
+                                    { label: "Achievement", value: "Gold Medalist in B.COM · University Rank Holder" },
                                     { label: "Interests", value: "HR Analytics · Talent Management · BI" },
                                     { label: "Location", value: "Tamil Nadu, India" },
                                 ].map(item => (
@@ -447,6 +447,7 @@ export default function Hero() {
                 </div>
             </section>
             {/* Education Section */}
+
             <section
                 id="education"
                 className="py-28 relative overflow-hidden"
