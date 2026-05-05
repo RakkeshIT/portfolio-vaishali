@@ -1,16 +1,17 @@
 import { useState, useEffect, useRef } from "react";
+import emailjs from "emailjs-com";
 import { Mail, Phone, Download, Award, Briefcase, User, Home, ChevronDown, ExternalLink, Star, BarChart2, Database, FileSpreadsheet, TrendingUp, MessageSquare, Users, Brain, Menu, X } from "lucide-react";
 import { FaLinkedinIn } from "react-icons/fa6";
 import Vaishali from '../assets/vaishali.png'
 // Add this to your useInView hooks at the top of the component:
-const NAV_LINKS = ["Home", "About", "Experience", "Skills", "Certifications", "Achievements", "Contact"];
+const NAV_LINKS = ["Home", "About", "Education", "Experience", "Skills", "Certifications", "Achievements", "Contact"];
 // ─── ACHIEVEMENTS DATA ───────────────────────────────────────────────────────
 const ACHIEVEMENTS = [
     {
         icon: "🥇",
         title: "Gold Medalist",
         org: "Bharathidasan University",
-        desc: "Awarded Gold Medal for academic excellence in MBA – HRM & Business Analytics",
+        desc: "Awarded Gold Medal for academic excellence in MBA – HR & Business Analytics",
         color: "#f59e0b",
         year: "2024",
     },
@@ -34,7 +35,7 @@ const ACHIEVEMENTS = [
         icon: "💡",
         title: "MBA Specialization",
         org: "Human Resource Management",
-        desc: "Dual specialization in HRM and Business Analytics with distinction-level performance",
+        desc: "Dual specialization in HR and Business Analytics with distinction-level performance",
         color: "#ec4899",
         year: "2023–2024",
     },
@@ -77,7 +78,7 @@ const EXPERIENCES = [
         location: "Chennai",
         role: "HR Intern",
         duration: "2 Months",
-        year: "2024",
+        year: "Jun 2025 - July 2025",
         points: [
             "Supported end-to-end recruitment process including resume screening and interview coordination",
             "Managed onboarding activities and coordinated with cross-functional teams",
@@ -91,8 +92,8 @@ const EXPERIENCES = [
         company: "Netaxis IT Solutions",
         location: "Chennai – Anna Nagar",
         role: "HR Intern",
-        duration: "1 Month",
-        year: "2024",
+        duration: "2 Month",
+        year: "Dec 2025 - Jan 2026",
         points: [
             "Assisted HR team in daily operations and employee engagement activities",
             "Handled HR documentation, filing, and record management",
@@ -124,6 +125,23 @@ const CERTIFICATIONS = [
         desc: "Gained strong understanding of data science concepts and analytical thinking. Completed with Elite certification (61%) through consistent effort and practical learning."
     }
 ];
+const EDUCATION = [
+    {
+        degree: "MBA - HR & Business Analytics",
+        college: "Bharathidasan University",
+        year: "Aug 2024 – July 2026",
+        score: "CGPA: 9.6",
+        color: "#6366f1",
+    },
+    {
+        degree: "B.Com",
+        college: "Bharathidasan University",
+        year: "Oct 2021 –May  2024",
+        score: "CGPA: 9.1",
+        color: "#22c55e",
+    },
+];
+
 function useInView(threshold = 0.15) {
     const ref = useRef(null);
     const [visible, setVisible] = useState(false);
@@ -159,13 +177,58 @@ function SkillBar({ skill, delay }) {
     );
 }
 
+
 export default function Hero() {
     const [active, setActive] = useState("Home");
     const [menuOpen, setMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [imgLoaded, setImgLoaded] = useState(false);
     const [achieveRef, achieveVisible] = useInView();
+    const [loading, setLoading] = useState(false)
+    const [form, setForm] = useState({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+    });
 
+    const handleSend = (e) => {
+        e.preventDefault();
+        setLoading(true)
+        emailjs
+            .send(
+                "service_tvrydfg",   // 🔁 replace
+                "template_xecb0v9",  // 🔁 replace
+                {
+                    from_name: form.name,
+                    from_email: form.email,
+                    subject: form.subject,
+                    message: form.message,
+                },
+                "H79AU5DuhkjQX48wv"    // 🔁 replace
+            )
+            .then(() => {
+                alert("Message sent successfully ✅");
+                setForm({ name: "", email: "", subject: "", message: "" });
+            })
+            .catch((error) => {
+                console.error(error);
+                alert("Failed to send ❌");
+                setLoading(false)
+            });
+    };
+    const handleChange = (e) => {
+        const { placeholder, value } = e.target;
+
+        const keyMap = {
+            "Your Name": "name",
+            "Your Email": "email",
+            Subject: "subject",
+            "Your message...": "message",
+        };
+
+        setForm({ ...form, [keyMap[placeholder]]: value });
+    };
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 40);
@@ -357,7 +420,7 @@ export default function Hero() {
                                     <User size={18} className="text-indigo-400" /> Quick Info
                                 </h3>
                                 {[
-                                    { label: "Degree", value: "MBA – HRM & Business Analytics" },
+                                    { label: "Degree", value: "MBA – HR & Business Analytics" },
                                     { label: "University", value: "Bharathidasan University" },
                                     { label: "Achievement", value: "Gold Medalist · University Rank Holder" },
                                     { label: "Interests", value: "HR Analytics · Talent Management · BI" },
@@ -369,7 +432,62 @@ export default function Hero() {
                                     </div>
                                 ))}
                             </div>
+
+                            <a href="https://docs.google.com/document/d/1NLeOd9DOBD22jw0uzjFMJ52pfz7ARCMb/edit?usp=sharing&ouid=105337417820423509416&rtpof=true&sd=true" target="_blank" className="inline-block px-7 text-center py-3 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all duration-300 shadow-lg shadow-indigo-600/30 hover:shadow-indigo-500/50 hover:-translate-y-0.5 active:scale-95">
+                                Download Resume
+                            </a>
                         </div>
+                    </div>
+                </div>
+            </section>
+            {/* Education Section */}
+            <section
+                id="education"
+                className="py-28 relative overflow-hidden"
+            >
+                <div className="max-w-6xl mx-auto px-6">
+                    <div className="flex items-center gap-4 mb-14">
+                        <span className="w-10 h-0.5 bg-indigo-500" />
+                        <h2 className="text-4xl md:text-5xl font-display">
+                            <span className="shimmer-text">Education</span>
+                        </h2>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 gap-6">
+                        {EDUCATION.map((edu, i) => (
+                            <div
+                                key={i}
+                                className="glass rounded-3xl p-6 flex flex-col gap-3 hover:-translate-y-2 transition-all duration-500"
+                                style={{ border: `1px solid ${edu.color}22` }}
+                            >
+                                {/* Top */}
+                                <div className="flex items-center justify-between">
+                                    <h3 className="text-white font-semibold text-lg">
+                                        {edu.degree}
+                                    </h3>
+                                    <span
+                                        className="text-xs font-medium px-3 py-1 rounded-full"
+                                        style={{
+                                            background: `${edu.color}22`,
+                                            color: edu.color,
+                                        }}
+                                    >
+                                        {edu.year}
+                                    </span>
+                                </div>
+
+                                {/* College */}
+                                <p className="text-sm text-slate-400">{edu.college}</p>
+
+                                {/* Score */}
+                                <p
+                                    className="text-sm font-semibold"
+                                    style={{ color: edu.color }}
+                                >
+                                    {edu.score}
+                                </p>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -481,193 +599,193 @@ export default function Hero() {
             </section>
 
             {/* ─── ACHIEVEMENTS SECTION ─────────────────────────────────────────────── */}
-          <section id="achievements" className="py-28 relative overflow-hidden">
-  <div className="absolute inset-0 grid-dots opacity-40 pointer-events-none" />
-  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-3xl pointer-events-none" />
+            <section id="achievements" className="py-28 relative overflow-hidden">
+                <div className="absolute inset-0 grid-dots opacity-40 pointer-events-none" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-3xl pointer-events-none" />
 
-  <div className="max-w-6xl mx-auto px-6">
-    <div ref={achieveRef}>
+                <div className="max-w-6xl mx-auto px-6">
+                    <div ref={achieveRef}>
 
-      {/* Heading */}
-      <div className={`flex items-center gap-4 mb-14 transition-all duration-700 ${achieveVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-        <span className="w-10 h-0.5 bg-yellow-500" />
-        <h2 className="font-display text-4xl md:text-5xl">
-          Achieve<span className="shimmer-text">ments</span>
-        </h2>
-      </div>
+                        {/* Heading */}
+                        <div className={`flex items-center gap-4 mb-14 transition-all duration-700 ${achieveVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+                            <span className="w-10 h-0.5 bg-yellow-500" />
+                            <h2 className="font-display text-4xl md:text-5xl">
+                                Achieve<span className="shimmer-text">ments</span>
+                            </h2>
+                        </div>
 
-      {/* Stat strip */}
-      <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 transition-all duration-700 delay-100 ${achieveVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-        {[
-          { value: "🥇", label: "Gold Medal",      sub: "Top Graduate" },
-          { value: "#1",  label: "University Rank", sub: "Batch Topper" },
-          { value: "2",   label: "Internships",     sub: "Completed"   },
-          { value: "1",   label: "Publication",     sub: "Book Chapter" },
-        ].map((s) => (
-          <div key={s.label} className="glass rounded-2xl p-5 text-center hover:-translate-y-1 transition-all duration-300 group">
-            <p className="text-3xl font-bold text-yellow-400 group-hover:scale-110 inline-block transition-transform duration-300">{s.value}</p>
-            <p className="text-sm font-semibold text-slate-200 mt-1">{s.label}</p>
-            <p className="text-xs text-slate-600 mt-0.5">{s.sub}</p>
-          </div>
-        ))}
-      </div>
+                        {/* Stat strip */}
+                        <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 transition-all duration-700 delay-100 ${achieveVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+                            {[
+                                { value: "🥇", label: "Gold Medal", sub: "Top Graduate" },
+                                { value: "#1", label: "University Rank", sub: "Batch Topper" },
+                                { value: "2", label: "Internships", sub: "Completed" },
+                                { value: "1", label: "Publication", sub: "Book Chapter" },
+                            ].map((s) => (
+                                <div key={s.label} className="glass rounded-2xl p-5 text-center hover:-translate-y-1 transition-all duration-300 group">
+                                    <p className="text-3xl font-bold text-yellow-400 group-hover:scale-110 inline-block transition-transform duration-300">{s.value}</p>
+                                    <p className="text-sm font-semibold text-slate-200 mt-1">{s.label}</p>
+                                    <p className="text-xs text-slate-600 mt-0.5">{s.sub}</p>
+                                </div>
+                            ))}
+                        </div>
 
-      {/* 4 Achievement cards */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
-        {ACHIEVEMENTS.map((item, i) => (
-          <div
-            key={item.title}
-            className={`glass rounded-3xl p-6 flex flex-col gap-4 group hover:-translate-y-2 transition-all duration-700 ${achieveVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
-            style={{
-              transitionDelay: `${i * 120 + 200}ms`,
-              borderColor: `${item.color}33`,
-              background: `linear-gradient(145deg, ${item.color}08, transparent)`,
-            }}
-          >
-            <div
-              className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300"
-              style={{ background: `${item.color}20` }}
-            >
-              {item.icon}
-            </div>
-            <div className="flex-1 space-y-1.5">
-              <div className="flex items-start justify-between gap-2">
-                <h3 className="font-bold text-white text-sm leading-snug">{item.title}</h3>
-                <span
-                  className="text-xs px-2 py-0.5 rounded-full flex-shrink-0 font-mono"
-                  style={{ background: `${item.color}18`, color: item.color }}
-                >
-                  {item.year}
-                </span>
-              </div>
-              <p className="text-xs font-semibold" style={{ color: item.color }}>{item.org}</p>
-              <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
-            </div>
-            <div
-              className="h-0.5 rounded-full w-0 group-hover:w-full transition-all duration-500"
-              style={{ background: `linear-gradient(90deg, transparent, ${item.color}, transparent)` }}
-            />
-          </div>
-        ))}
-      </div>
+                        {/* 4 Achievement cards */}
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
+                            {ACHIEVEMENTS.map((item, i) => (
+                                <div
+                                    key={item.title}
+                                    className={`glass rounded-3xl p-6 flex flex-col gap-4 group hover:-translate-y-2 transition-all duration-700 ${achieveVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
+                                    style={{
+                                        transitionDelay: `${i * 120 + 200}ms`,
+                                        borderColor: `${item.color}33`,
+                                        background: `linear-gradient(145deg, ${item.color}08, transparent)`,
+                                    }}
+                                >
+                                    <div
+                                        className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300"
+                                        style={{ background: `${item.color}20` }}
+                                    >
+                                        {item.icon}
+                                    </div>
+                                    <div className="flex-1 space-y-1.5">
+                                        <div className="flex items-start justify-between gap-2">
+                                            <h3 className="font-bold text-white text-sm leading-snug">{item.title}</h3>
+                                            <span
+                                                className="text-xs px-2 py-0.5 rounded-full flex-shrink-0 font-mono"
+                                                style={{ background: `${item.color}18`, color: item.color }}
+                                            >
+                                                {item.year}
+                                            </span>
+                                        </div>
+                                        <p className="text-xs font-semibold" style={{ color: item.color }}>{item.org}</p>
+                                        <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
+                                    </div>
+                                    <div
+                                        className="h-0.5 rounded-full w-0 group-hover:w-full transition-all duration-500"
+                                        style={{ background: `linear-gradient(90deg, transparent, ${item.color}, transparent)` }}
+                                    />
+                                </div>
+                            ))}
+                        </div>
 
-      {/* ── BOOK CARD — separate, full width, inside same section ── */}
-      <div
-        className={`glass rounded-3xl overflow-hidden transition-all duration-1000 delay-700 ${achieveVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
-        style={{ borderColor: "#06b6d433", background: "linear-gradient(135deg, #06b6d408, #6366f105)" }}
-      >
-        {/* Top rainbow bar */}
-        <div className="h-1 w-full" style={{ background: "linear-gradient(90deg, #06b6d4, #6366f1, #ec4899)" }} />
+                        {/* ── BOOK CARD — separate, full width, inside same section ── */}
+                        <div
+                            className={`glass rounded-3xl overflow-hidden transition-all duration-1000 delay-700 ${achieveVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
+                            style={{ borderColor: "#06b6d433", background: "linear-gradient(135deg, #06b6d408, #6366f105)" }}
+                        >
+                            {/* Top rainbow bar */}
+                            <div className="h-1 w-full" style={{ background: "linear-gradient(90deg, #06b6d4, #6366f1, #ec4899)" }} />
 
-        <div className="p-8 flex flex-col md:flex-row items-center md:items-start gap-8">
+                            <div className="p-8 flex flex-col md:flex-row items-center md:items-start gap-8">
 
-          {/* Book mockup */}
-          <div className="flex-shrink-0 flex flex-col items-center gap-4">
-            <div className="relative float-anim">
-              <div className="absolute inset-0 bg-cyan-500/20 blur-2xl rounded-full scale-150 pointer-events-none" />
-              <div
-                className="relative w-36 h-48 rounded-xl overflow-hidden"
-                style={{ boxShadow: "0 24px 48px #06b6d444, 0 0 0 1px #06b6d433" }}
-              >
-                <div className="absolute inset-0" style={{ background: "linear-gradient(145deg, #0c4a6e, #0e7490, #155e75)" }} />
-                <div className="absolute left-5 top-0 bottom-0 w-px bg-cyan-400/30" />
-                <div className="absolute inset-0 flex flex-col justify-between p-4">
-                  <div>
-                    <div className="text-2xl mb-2">📖</div>
-                    <p className="text-cyan-200 text-xs font-bold uppercase tracking-widest mb-1">Chapter</p>
-                    <p className="text-white text-xs leading-relaxed font-medium">AI in Personalized Learning</p>
-                  </div>
-                  <div>
-                    <div className="h-px bg-cyan-400/30 mb-2" />
-                    <p className="text-cyan-300 text-xs" style={{ fontSize: "9px" }}>ISBN: 978-93-94503-79-3</p>
-                  </div>
+                                {/* Book mockup */}
+                                <div className="flex-shrink-0 flex flex-col items-center gap-4">
+                                    <div className="relative float-anim">
+                                        <div className="absolute inset-0 bg-cyan-500/20 blur-2xl rounded-full scale-150 pointer-events-none" />
+                                        <div
+                                            className="relative w-36 h-48 rounded-xl overflow-hidden"
+                                            style={{ boxShadow: "0 24px 48px #06b6d444, 0 0 0 1px #06b6d433" }}
+                                        >
+                                            <div className="absolute inset-0" style={{ background: "linear-gradient(145deg, #0c4a6e, #0e7490, #155e75)" }} />
+                                            <div className="absolute left-5 top-0 bottom-0 w-px bg-cyan-400/30" />
+                                            <div className="absolute inset-0 flex flex-col justify-between p-4">
+                                                <div>
+                                                    <div className="text-2xl mb-2">📖</div>
+                                                    <p className="text-cyan-200 text-xs font-bold uppercase tracking-widest mb-1">Chapter</p>
+                                                    <p className="text-white text-xs leading-relaxed font-medium">AI in Personalized Learning</p>
+                                                </div>
+                                                <div>
+                                                    <div className="h-px bg-cyan-400/30 mb-2" />
+                                                    <p className="text-cyan-300 text-xs" style={{ fontSize: "9px" }}>ISBN: 978-93-94503-79-3</p>
+                                                </div>
+                                            </div>
+                                            <div className="absolute inset-0 opacity-10" style={{ background: "linear-gradient(135deg, white 0%, transparent 60%)" }} />
+                                        </div>
+                                    </div>
+                                    {/* Published badge */}
+                                    <div className="flex items-center gap-2 glass rounded-full px-4 py-2">
+                                        <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                                        <span className="text-xs font-semibold text-green-400">Officially Published</span>
+                                    </div>
+                                </div>
+
+                                {/* Vertical divider */}
+                                <div className="hidden md:block w-px self-stretch bg-cyan-500/15" />
+
+                                {/* Content */}
+                                <div className="flex-1 space-y-4 text-center md:text-left">
+                                    <div>
+                                        <p className="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-1">📚 Book Chapter Publication · {BOOK.year}</p>
+                                        <h3 className="font-display text-lg md:text-xl text-white leading-snug">"{BOOK.title}"</h3>
+                                    </div>
+
+                                    <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-1.5 text-xs text-slate-400">
+                                        <span>📘 <span className="text-slate-300 font-medium">Book:</span> {BOOK.book}</span>
+                                        <span>✏️ <span className="text-slate-300 font-medium">Editor:</span> {BOOK.editor}</span>
+                                        <span>🔖 <span className="text-slate-300 font-medium">ISBN:</span> {BOOK.isbn}</span>
+                                    </div>
+
+                                    <p className="text-sm text-slate-500 leading-relaxed max-w-2xl">{BOOK.description}</p>
+
+                                    {/* Highlights */}
+                                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                                        {BOOK.highlights.map((h, i) => (
+                                            <div key={i} className="flex items-center gap-2 glass rounded-xl px-3 py-2">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0" />
+                                                <span className="text-xs text-slate-400">{h}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* ── TWO BUTTONS ── */}
+                                    <div className="flex flex-col sm:flex-row gap-3 pt-1">
+                                        <a
+                                            href={BOOK.bookDownloadUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 hover:-translate-y-0.5 active:scale-95"
+                                            style={{
+                                                background: "linear-gradient(135deg, #0e7490, #06b6d4)",
+                                                boxShadow: "0 8px 24px #06b6d433",
+                                                color: "white",
+                                            }}
+                                        >
+                                            <Download size={15} /> Download Book
+                                        </a>
+                                        <a
+                                            href={BOOK.chapterUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 hover:-translate-y-0.5 active:scale-95 glass"
+                                            style={{ border: "1px solid #06b6d444", color: "#06b6d4" }}
+                                        >
+                                            <ExternalLink size={15} /> View My Chapter
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Quote banner */}
+                        <div
+                            className={`mt-6 glass rounded-3xl p-8 flex flex-col md:flex-row items-center gap-6 transition-all duration-700 delay-700 ${achieveVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                            style={{ borderColor: "#f59e0b22", background: "linear-gradient(135deg, #f59e0b08, transparent)" }}
+                        >
+                            <div className="text-5xl">🎓</div>
+                            <div className="text-center md:text-left">
+                                <p className="text-lg font-display italic text-slate-200">
+                                    "Excellence is not a destination but a continuous journey of learning and growth."
+                                </p>
+                                <p className="text-sm text-yellow-500 font-semibold mt-2">
+                                    — Gold Medalist · University Rank Holder · Published Author · Bharathidasan University
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-                <div className="absolute inset-0 opacity-10" style={{ background: "linear-gradient(135deg, white 0%, transparent 60%)" }} />
-              </div>
-            </div>
-            {/* Published badge */}
-            <div className="flex items-center gap-2 glass rounded-full px-4 py-2">
-              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-xs font-semibold text-green-400">Officially Published</span>
-            </div>
-          </div>
-
-          {/* Vertical divider */}
-          <div className="hidden md:block w-px self-stretch bg-cyan-500/15" />
-
-          {/* Content */}
-          <div className="flex-1 space-y-4 text-center md:text-left">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-1">📚 Book Chapter Publication · {BOOK.year}</p>
-              <h3 className="font-display text-lg md:text-xl text-white leading-snug">"{BOOK.title}"</h3>
-            </div>
-
-            <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-1.5 text-xs text-slate-400">
-              <span>📘 <span className="text-slate-300 font-medium">Book:</span> {BOOK.book}</span>
-              <span>✏️ <span className="text-slate-300 font-medium">Editor:</span> {BOOK.editor}</span>
-              <span>🔖 <span className="text-slate-300 font-medium">ISBN:</span> {BOOK.isbn}</span>
-            </div>
-
-            <p className="text-sm text-slate-500 leading-relaxed max-w-2xl">{BOOK.description}</p>
-
-            {/* Highlights */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              {BOOK.highlights.map((h, i) => (
-                <div key={i} className="flex items-center gap-2 glass rounded-xl px-3 py-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0" />
-                  <span className="text-xs text-slate-400">{h}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* ── TWO BUTTONS ── */}
-            <div className="flex flex-col sm:flex-row gap-3 pt-1">
-              <a
-                href={BOOK.bookDownloadUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 hover:-translate-y-0.5 active:scale-95"
-                style={{
-                  background: "linear-gradient(135deg, #0e7490, #06b6d4)",
-                  boxShadow: "0 8px 24px #06b6d433",
-                  color: "white",
-                }}
-              >
-                <Download size={15} /> Download Book
-              </a>
-              <a
-                href={BOOK.chapterUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 hover:-translate-y-0.5 active:scale-95 glass"
-                style={{ border: "1px solid #06b6d444", color: "#06b6d4" }}
-              >
-                <ExternalLink size={15} /> View My Chapter
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Quote banner */}
-      <div
-        className={`mt-6 glass rounded-3xl p-8 flex flex-col md:flex-row items-center gap-6 transition-all duration-700 delay-700 ${achieveVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-        style={{ borderColor: "#f59e0b22", background: "linear-gradient(135deg, #f59e0b08, transparent)" }}
-      >
-        <div className="text-5xl">🎓</div>
-        <div className="text-center md:text-left">
-          <p className="text-lg font-display italic text-slate-200">
-            "Excellence is not a destination but a continuous journey of learning and growth."
-          </p>
-          <p className="text-sm text-yellow-500 font-semibold mt-2">
-            — Gold Medalist · University Rank Holder · Published Author · Bharathidasan University
-          </p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
+            </section>
 
             {/* CONTACT SECTION */}
             <section id="contact" className="py-28 relative overflow-hidden">
@@ -684,35 +802,103 @@ export default function Hero() {
                         </p>
                         <div className="grid sm:grid-cols-3 gap-4 mb-10">
                             {[
-                                { icon: <Phone size={20} />, label: "Phone", value: "[Phone Number]", color: "#10b981" },
-                                { icon: <Mail size={20} />, label: "Email", value: "[Email ID]", color: "#6366f1" },
-                                { icon: <FaLinkedinIn size={20} />, label: "LinkedIn", value: "View Profile", color: "#06b6d4" },
-                            ].map(item => (
-                                <div key={item.label}
+                                {
+                                    icon: <Phone size={20} />,
+                                    label: "Phone",
+                                    value: "+91 8072 053 546",
+                                    link: "tel:+918072053546",
+                                    color: "#10b981",
+                                },
+                                {
+                                    icon: <Mail size={20} />,
+                                    label: "Email",
+                                    value: "vaishaliit444@gmail.com",
+                                    link: "mailto:vaishaliit444@gmail.com",
+                                    color: "#6366f1",
+                                },
+                                {
+                                    icon: <FaLinkedinIn size={20} />,
+                                    label: "LinkedIn",
+                                    value: "View Profile",
+                                    link: "https://www.linkedin.com/in/vaishalihr4/", // 👈 replace this
+                                    color: "#06b6d4",
+                                },
+                            ].map((item) => (
+                                <a
+                                    key={item.label}
+                                    href={item.link}
+                                    target={item.label === "LinkedIn" ? "_blank" : "_self"}
+                                    rel="noopener noreferrer"
                                     className="glass rounded-2xl p-5 flex flex-col items-center gap-3 hover:border-opacity-40 hover:-translate-y-1 transition-all duration-300 group cursor-pointer"
-                                    style={{ borderColor: `${item.color}22` }}>
-                                    <span style={{ color: item.color }} className="group-hover:scale-110 transition-transform duration-300">{item.icon}</span>
+                                    style={{ borderColor: `${item.color}22` }}
+                                >
+                                    <span
+                                        style={{ color: item.color }}
+                                        className="group-hover:scale-110 transition-transform duration-300"
+                                    >
+                                        {item.icon}
+                                    </span>
                                     <div>
-                                        <p className="text-xs uppercase tracking-widest text-slate-600 mb-0.5">{item.label}</p>
+                                        <p className="text-xs uppercase tracking-widest text-slate-600 mb-0.5">
+                                            {item.label}
+                                        </p>
                                         <p className="text-sm font-medium text-slate-300">{item.value}</p>
                                     </div>
-                                </div>
+                                </a>
                             ))}
                         </div>
-                        <div className="glass rounded-3xl p-8 text-left space-y-4">
+
+                        <form
+                            onSubmit={handleSend}
+                            className="glass rounded-3xl p-8 text-left space-y-4"
+                        >
                             <h3 className="font-semibold text-slate-200 flex items-center gap-2 mb-6">
                                 <ExternalLink size={16} className="text-indigo-400" /> Send a Message
                             </h3>
+
                             <div className="grid sm:grid-cols-2 gap-4">
-                                <input placeholder="Your Name" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500/50 transition-colors" />
-                                <input placeholder="Your Email" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500/50 transition-colors" />
+                                <input
+                                    placeholder="Your Name"
+                                    value={form.name}
+                                    onChange={handleChange}
+                                    required
+                                    className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500/50 transition-colors"
+                                />
+                                <input
+                                    placeholder="Your Email"
+                                    value={form.email}
+                                    onChange={handleChange}
+                                    required
+                                    type="email"
+                                    className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500/50 transition-colors"
+                                />
                             </div>
-                            <input placeholder="Subject" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500/50 transition-colors" />
-                            <textarea placeholder="Your message..." rows={4} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500/50 transition-colors resize-none" />
-                            <button className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all duration-300 shadow-lg shadow-indigo-600/30 hover:shadow-indigo-500/50 hover:-translate-y-0.5 active:scale-95">
-                                Send Message ✦
+
+                            <input
+                                placeholder="Subject"
+                                value={form.subject}
+                                onChange={handleChange}
+                                required
+                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500/50 transition-colors"
+                            />
+
+                            <textarea
+                                placeholder="Your message..."
+                                rows={4}
+                                value={form.message}
+                                onChange={handleChange}
+                                required
+                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500/50 transition-colors resize-none"
+                            />
+
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all duration-300 shadow-lg shadow-indigo-600/30 hover:shadow-indigo-500/50 hover:-translate-y-0.5 active:scale-95"
+                            >
+                                {loading ? "Sending..." : "Send Message ✦"}
                             </button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </section>
