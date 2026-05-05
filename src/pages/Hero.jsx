@@ -536,7 +536,6 @@ export default function Hero() {
                                         rel="noopener noreferrer"
                                         className="flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-300 hover:-translate-y-0.5 active:scale-95"
                                         style={{ background: `${exp.color}22`, color: exp.color, border: `1px solid ${exp.color}44` }}
-                                        onClick={() => alert("Attach your internship certificate PDF to enable download.")}
                                     >
                                         <Download size={15} /> Download Certificate
                                     </a>
