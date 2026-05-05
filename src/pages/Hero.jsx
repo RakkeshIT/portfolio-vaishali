@@ -57,8 +57,9 @@ const BOOK = {
         "Data-driven classroom insights",
         "Future of smart education",
     ],
-    bookDownloadUrl: "#",  // ← Replace with actual link
-    chapterUrl: "#",       // ← Replace with actual link
+    bookDownloadUrl: "https://drive.google.com/file/d/1pLDhJgNTmmZGASpp_84Elv_2nwjus3U_/view?usp=sharing",  // ← Replace with actual link
+    chapterUrl: "https://drive.google.com/file/d/1AAvlKcWuKV9XFb5_mY3QGcDL8Eo8WXRF/view?usp=sharing",
+    // ← Replace with actual link
 };
 
 const SKILLS = [
@@ -87,6 +88,7 @@ const EXPERIENCES = [
         ],
         color: "#6366f1",
         bg: "from-indigo-500/10 to-purple-500/5",
+        href: "https://drive.google.com/file/d/1Dfts0FtchbCtXtcsrS8hB9PnmmeENV6H/view?usp=sharing",
     },
     {
         company: "Netaxis IT Solutions",
@@ -102,6 +104,7 @@ const EXPERIENCES = [
         ],
         color: "#06b6d4",
         bg: "from-cyan-500/10 to-blue-500/5",
+        href: "https://drive.google.com/file/d/1yNH44Oza59uGPXd59WRdXcTrx0u1zK09/view?usp=sharing",
     },
 ];
 
@@ -117,12 +120,14 @@ const CERTIFICATIONS = [
         name: "Python for Data Science",
         org: "NPTEL - IIT Madras (SWAYAM)",
         color: "#22c55e",
+        href: "https://drive.google.com/file/d/1SvRbfwZ_kd3GJVKdMt2FI3WTkqwVjQ1E/view?usp=sharing",
         desc: "Learned Python fundamentals, data analysis, and visualization using NumPy, pandas, and matplotlib. Worked with real-world datasets. Achieved Elite certification with 68%."
     },
     {
         name: "Data Science for Engineers",
         org: "NPTEL",
         color: "#f59e0b",
+        href: "https://drive.google.com/file/d/1hn8ODj6EGnTh_Opw0WannUDS7m42R_F3/view?usp=sharing",
         desc: "Gained strong understanding of data science concepts and analytical thinking. Completed with Elite certification (61%) through consistent effort and practical learning."
     }
 ];
@@ -525,13 +530,16 @@ export default function Hero() {
                                             </li>
                                         ))}
                                     </ul>
-                                    <button
+                                    <a
+                                        href={exp.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         className="flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-300 hover:-translate-y-0.5 active:scale-95"
                                         style={{ background: `${exp.color}22`, color: exp.color, border: `1px solid ${exp.color}44` }}
                                         onClick={() => alert("Attach your internship certificate PDF to enable download.")}
                                     >
                                         <Download size={15} /> Download Certificate
-                                    </button>
+                                    </a>
                                 </div>
                             ))}
                         </div>
