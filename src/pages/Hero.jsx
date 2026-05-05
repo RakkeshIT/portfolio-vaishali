@@ -4,7 +4,7 @@ import { Mail, Phone, Download, Award, Briefcase, User, Home, ChevronDown, Exter
 import { FaLinkedinIn } from "react-icons/fa6";
 import Vaishali from '../assets/vaishali.png'
 // Add this to your useInView hooks at the top of the component:
-const NAV_LINKS = ["Home", "About", "Education", "Experience", "Skills", "Certifications", "Achievements", "Contact"];
+const NAV_LINKS = ["Home", "About", "Education", "Projects", "Experience", "Skills", "Certifications", "Achievements", "Contact"];
 // ─── ACHIEVEMENTS DATA ───────────────────────────────────────────────────────
 const ACHIEVEMENTS = [
     {
@@ -105,6 +105,32 @@ const EXPERIENCES = [
         color: "#06b6d4",
         bg: "from-cyan-500/10 to-blue-500/5",
         href: "https://drive.google.com/file/d/1yNH44Oza59uGPXd59WRdXcTrx0u1zK09/view?usp=sharing",
+    },
+];
+
+// ─── PROJECTS DATA ───────────────────────────────────────────────────────────
+const PROJECTS = [
+    {
+        type: "Descriptive Research · 2025",
+        title: "Impact of Artificial Intelligence on Employee Training Effectiveness",
+        org: "Netaxis IT Solutions Pvt. Ltd., Chennai",
+        sample: "150 Employees",
+        scale: "5-Point Likert Scale",
+        stats: [
+            { val: "150", label: "Respondents" },
+            { val: "4", label: "Statistical Tools" },
+            { val: "5", label: "AI Dimensions" },
+        ],
+        desc: "Examined how AI technologies — including machine learning, NLP, and predictive analytics — shape employee training effectiveness in a real-world organizational setting.",
+        points: [
+            "Collected and analyzed primary data from 150 employees using a structured 5-point Likert scale questionnaire.",
+            "Applied Mean Analysis, ANOVA, Correlation, and Regression to identify key drivers of training effectiveness.",
+            "Evaluated AI's role across personalized learning, real-time feedback, skill development, accessibility, and engagement.",
+            "Identified challenges including technological adaptation, ethical concerns, and continuous reskilling needs.",
+            "Concluded that AI significantly enhances training outcomes by making learning more personalized and outcome-oriented.",
+        ],
+        tools: ["MS Excel", "SPSS", "ANOVA", "Regression Analysis", "Correlation", "Mean Analysis", "Likert Scale"],
+        insight: "AI-powered training systems demonstrated a statistically significant positive impact on learning personalization and employee engagement.",
     },
 ];
 
@@ -493,6 +519,90 @@ export default function Hero() {
                                 >
                                     {edu.score}
                                 </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* PROJECTS SECTION */}
+            <section id="projects" className="py-28 relative overflow-hidden" style={{ background: "#f7f5f0" }}>
+                {/* bg dots */}
+                <div className="absolute inset-0 pointer-events-none" style={{
+                    backgroundImage: "radial-gradient(#6366f118 1px, transparent 1px)",
+                    backgroundSize: "28px 28px"
+                }} />
+                <div className="absolute top-0 right-0 w-80 h-80 rounded-full pointer-events-none" style={{
+                    background: "radial-gradient(circle, #e8e3f8 0%, transparent 70%)"
+                }} />
+                <div className="absolute bottom-10 left-0 w-64 h-64 rounded-full pointer-events-none" style={{
+                    background: "radial-gradient(circle, #d4f0e8 0%, transparent 70%)"
+                }} />
+
+                <div className="max-w-5xl mx-auto px-6 relative z-10">
+                    <div className="flex items-center gap-4 mb-14">
+                        <span className="w-10 h-0.5 bg-indigo-500" />
+                        <h2 className="font-display text-4xl md:text-5xl text-[#1a1625]">
+                            Research <span className="italic text-indigo-500">Projects</span>
+                        </h2>
+                    </div>
+
+                    <div className="flex flex-col gap-8">
+                        {PROJECTS.map((proj, idx) => (
+                            <div key={idx} className="bg-white rounded-3xl overflow-hidden border border-indigo-100 shadow-lg hover:-translate-y-1 transition-all duration-300">
+                                {/* Card Header */}
+                                <div className="p-8 relative overflow-hidden" style={{
+                                    background: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 60%, #06b6d4 100%)"
+                                }}>
+                                    <div className="absolute -top-10 -right-10 w-48 h-48 bg-white/10 rounded-full pointer-events-none" />
+                                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest text-white/90 border border-white/25 bg-white/15 mb-4">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-300" />{proj.type}
+                                    </span>
+                                    <h3 className="font-display text-2xl font-semibold text-white mb-3 relative z-10">{proj.title}</h3>
+                                    <div className="flex flex-wrap gap-2 relative z-10">
+                                        {[`🏢 ${proj.org}`, `👥 Sample: ${proj.sample}`, `📋 ${proj.scale}`].map(m => (
+                                            <span key={m} className="px-3 py-1 rounded-full text-xs text-white/85 bg-white/15">{m}</span>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Card Body */}
+                                <div className="p-8">
+                                    {/* Stats strip */}
+                                    <div className="grid grid-cols-3 gap-px bg-indigo-100 rounded-xl overflow-hidden mb-6">
+                                        {proj.stats.map(s => (
+                                            <div key={s.label} className="bg-indigo-50/60 p-4 text-center">
+                                                <p className="font-display text-2xl font-semibold text-indigo-500">{s.val}</p>
+                                                <p className="text-xs text-slate-500 mt-1">{s.label}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    <p className="text-slate-500 text-sm leading-relaxed mb-6">{proj.desc}</p>
+
+                                    <ul className="space-y-2.5 mb-7">
+                                        {proj.points.map((pt, j) => (
+                                            <li key={j} className="flex items-start gap-3 text-sm text-slate-600 leading-relaxed">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 flex-shrink-0 mt-2" />
+                                                {pt}
+                                            </li>
+                                        ))}
+                                    </ul>
+
+                                    <p className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-3">Tools & Methods</p>
+                                    <div className="flex flex-wrap gap-2 mb-6">
+                                        {proj.tools.map(t => (
+                                            <span key={t} className="font-mono text-xs px-3 py-1.5 rounded-md bg-indigo-50 text-indigo-500 border border-indigo-200">{t}</span>
+                                        ))}
+                                    </div>
+
+                                    <div className="flex gap-3 items-start bg-gradient-to-r from-indigo-50 to-cyan-50 border border-indigo-100 rounded-2xl p-4">
+                                        <span className="text-lg">💡</span>
+                                        <p className="text-sm text-slate-600 leading-relaxed">
+                                            <span className="font-semibold text-indigo-500">Key Insight: </span>{proj.insight}
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         ))}
                     </div>
