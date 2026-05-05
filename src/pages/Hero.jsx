@@ -110,7 +110,8 @@ const CERTIFICATIONS = [
         name: "Soft Skills for Business Negotiation",
         org: "MSME",
         color: "#6366f1",
-        desc: "Completed certification focused on business negotiation, conflict resolution, and decision-making skills. This course improved my confidence in handling real-world business situations."
+        desc: "Completed certification focused on business negotiation, conflict resolution, and decision-making skills. This course improved my confidence in handling real-world business situations.",
+        href: "https://drive.google.com/file/d/10WjLNeTktGOA0c0t6UzaoQ2Zg1Usd5XV/view?usp=sharing"
     },
     {
         name: "Python for Data Science",
@@ -433,7 +434,7 @@ export default function Hero() {
                                 ))}
                             </div>
 
-                            <a href="https://docs.google.com/document/d/1NLeOd9DOBD22jw0uzjFMJ52pfz7ARCMb/edit?usp=sharing&ouid=105337417820423509416&rtpof=true&sd=true" target="_blank" className="inline-block px-7 text-center py-3 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all duration-300 shadow-lg shadow-indigo-600/30 hover:shadow-indigo-500/50 hover:-translate-y-0.5 active:scale-95">
+                            <a href="https://drive.google.com/file/d/1p5dk7jPCk2KCg3nQh7svPnLwIDSKp8fa/view?usp=sharing" target="_blank" className="inline-block px-7 text-center py-3 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all duration-300 shadow-lg shadow-indigo-600/30 hover:shadow-indigo-500/50 hover:-translate-y-0.5 active:scale-95">
                                 Download Resume
                             </a>
                         </div>
@@ -584,13 +585,15 @@ export default function Hero() {
                                         <p className="text-xs mt-1 font-medium" style={{ color: cert.color }}>{cert.org}</p>
                                         <p className="text-xs text-slate-500 mt-2 leading-relaxed">{cert.desc}</p>
                                     </div>
-                                    <button
+                                    <a
+                                        href={cert.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         className="flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-full transition-all duration-300 group-hover:-translate-y-0.5 active:scale-95 w-full justify-center"
                                         style={{ background: `${cert.color}18`, color: cert.color, border: `1px solid ${cert.color}33` }}
-                                        onClick={() => alert("Attach your certificate file to enable download.")}
                                     >
                                         <Download size={13} /> Download Certificate
-                                    </button>
+                                    </a>
                                 </div>
                             ))}
                         </div>
