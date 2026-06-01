@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import emailjs from "emailjs-com";
-import { Mail, Phone, Download, Award, Briefcase, User, Home, ChevronDown, ExternalLink, Star, BarChart2, Database, FileSpreadsheet, TrendingUp, MessageSquare, Users, Brain, Menu, X } from "lucide-react";
+import { Mail, Phone, Download, Award, Briefcase, User, ChevronDown, ExternalLink, Star, BarChart2, FileSpreadsheet, TrendingUp, MessageSquare, Users, Brain, Menu, X } from "lucide-react";
 import { FaLinkedinIn } from "react-icons/fa6";
 import Vaishali from '../assets/vaishali.png'
+import { Link } from "react-router-dom";
 // Add this to your useInView hooks at the top of the component:
 const NAV_LINKS = ["Home", "About", "Education", "Projects", "Experience", "Skills", "Certifications", "Achievements", "Contact"];
 // ─── ACHIEVEMENTS DATA ───────────────────────────────────────────────────────
@@ -405,6 +406,18 @@ export default function Hero() {
                                 <p className="text-xs font-bold gold-badge">Gold Medalist</p>
                                 <p className="text-xs text-slate-500">Bharathidasan University</p>
                             </div>
+
+                        </div>
+                        <div>
+                            <a
+                                href="https://drive.google.com/file/d/1p5dk7jPCk2KCg3nQh7svPnLwIDSKp8fa/view?usp=sharing"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="glass inline-flex items-center gap-2 px-12 py-1 border text-indigo-400 rounded-lg hover:bg-indigo-500 hover:text-white transition-all duration-300"
+                            >
+                                Resume
+                                <ExternalLink size={16} />
+                            </a>
                         </div>
                     </div>
                 </div>
