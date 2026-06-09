@@ -410,7 +410,7 @@ export default function Hero() {
                         </div>
                         <div>
                             <a
-                                href="https://drive.google.com/file/d/1ZPpgVgjsV0_ysBP4Wqa0ZbNe6XXEFxKm/view?usp=sharing"
+                                href="https://drive.google.com/file/d/1F6GRDMdEnf3Tsomhzv9fmkuUTEzddgv9/view?usp=sharing"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="glass inline-flex items-center gap-2 px-12 py-1 border text-indigo-400 rounded-lg hover:bg-indigo-500 hover:text-white transition-all duration-300"
