@@ -96,7 +96,7 @@ const EXPERIENCES = [
         location: "Chennai – Anna Nagar",
         role: "HR Intern",
         duration: "2 Month",
-        year: "Dec 2025 - Jan 2026",
+        year: "Jan 2026 - Feb 2026",
         points: [
             "Assisted HR team in daily operations and employee engagement activities",
             "Handled HR documentation, filing, and record management",
@@ -410,7 +410,7 @@ export default function Hero() {
                         </div>
                         <div>
                             <a
-                                href="https://drive.google.com/file/d/1F6GRDMdEnf3Tsomhzv9fmkuUTEzddgv9/view?usp=sharing"
+                                href="https://drive.google.com/file/d/1KNhBhyxrUW_YmPx2RdhnwO8HYwVLzqsN/view?usp=drive_link"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="glass inline-flex items-center gap-2 px-12 py-1 border text-indigo-400 rounded-lg hover:bg-indigo-500 hover:text-white transition-all duration-300"
